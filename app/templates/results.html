@@ -7,10 +7,16 @@
 
         {% for book in books %}
 {#        <div><p>{{ post.author.username }} says: <b>{{ post.body }}</b></p></div>#}
-            <img src="{{ book.image_link }}">
-            {{ book.title }} <br>
-            By: {{ book.author }} <br>
-            {{ book.description }} <br>
+            <div>
+                <form id="search-results" method="POST" action="/save">
+                    <img src="{{ book.image_link }}">
+                    {{ book.title }} <br>
+                    By: {{ book.author }} <br>
+                    {{ book.description }} <br>
+                    <input type="hidden" name="data" value="{{ book }}"><br>
+                    <button type="submit">Add to Book List</button>
+                </form>
+            </div>
         {% endfor %}
 
 

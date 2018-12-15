@@ -3,9 +3,10 @@ from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
 from app import app, db
 from app.forms import LoginForm, RegistrationForm, EditProfileForm, PostForm, SearchForm
-from app.models import User, Post
+from app.models import User, Post, Book
 from datetime import datetime
 import app.api as api
+import ast
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -20,17 +21,6 @@ def index():
         flash('your post is now live!')
         return redirect(url_for('index'))
     posts = current_user.followed_posts().all()
-    # #user = {'username': 'Alexis'}
-    # posts = [
-    #      {
-    #          'author': {'username': 'Mason'},
-    #          'body': 'I loved the Harry Potter series!'
-    #      },
-    #      {
-    #          'author': {'username': 'Anders'},
-    #          'body': 'I also thought Harry Potter series was awesome!'
-    #      }
-    # ]
     return render_template("index.html", title='Home Page', form=form, posts=posts)
 
 
@@ -119,8 +109,19 @@ def search_results(search):
     results = api.get_book_data(search_string)
     return render_template('results.html', books=results)
 
+@app.route('/save', methods=['POST'])
+@login_required
+def save():
+    data = request.form['data']
+    data = ast.literal_eval(data)
+    # save book data to database
+    b = Book(id=data.get('id'), isbn=data.get('isbn'), title=data.get('title'), author=data.get('author'),
+                image_link=data.get('image_link'), image_link_small=data.get('image_link_small'),
+                description=data.get('description'), owner=current_user)
+    db.session.add(b)
+    db.session.commit()
 
-
+    return render_template('save.html', image_link=data.get('image_link'))
 
 
 @app.route('/follow/<username>')
