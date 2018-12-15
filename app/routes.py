@@ -104,10 +104,21 @@ def edit_profile():
 @login_required
 def search():
     form = SearchForm()
+    search = SearchForm(request.form)
+    if request.method == 'POST':
+        return search_results(search)
     #if form.validate_on_submit():
     #search = form.search.data
     #books = api.get_book_data(search)
     return render_template('search.html', form=form)#, books=books)
+
+@app.route('/results')
+@login_required
+def search_results(search):
+    search_string = search.data['search']
+    results = api.get_book_data(search_string)
+    return render_template('results.html', books=results)
+
 
 
 
