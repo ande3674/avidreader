@@ -9,3 +9,5 @@ class Config(object):
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or 'sqlite:///' + os.path.join(basedir, 'app.db')
     SQL_ALCHEMY_TRACK_MODIFICATIONS = False
     POSTS_PER_PAGE = 3
+    URL_END = '&key=AIzaSyAdhqZaUyS--kQ3BnAjUOmmfSc70FeCYwg'
+    URL_START = 'https://www.googleapis.com/books/v1/volumes?q='

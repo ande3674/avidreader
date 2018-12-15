@@ -2,9 +2,10 @@ from flask import render_template, flash, redirect, url_for, request
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
 from app import app, db
-from app.forms import LoginForm, RegistrationForm, EditProfileForm, PostForm
+from app.forms import LoginForm, RegistrationForm, EditProfileForm, PostForm, SearchForm
 from app.models import User, Post
 from datetime import datetime
+import app.api as api
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -97,6 +98,18 @@ def edit_profile():
         form.username.data = current_user.username
         form.about_me.data = current_user.about_me
     return render_template('edit_profile.html', title='Edit Profile', form=form)
+
+
+@app.route('/search', methods=['GET', 'POST'])
+@login_required
+def search():
+    form = SearchForm()
+    #if form.validate_on_submit():
+    #search = form.search.data
+    #books = api.get_book_data(search)
+    return render_template('search.html', form=form)#, books=books)
+
+
 
 
 @app.route('/follow/<username>')
