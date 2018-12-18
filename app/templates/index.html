@@ -5,14 +5,6 @@
 
         <h1>Hello, {{ current_user.username }}</h1>
 
-    <div>Here are some popular books today...
-        <br>
-        {% for nyt_book in nyt_books %}
-            {% include '_nyt_book.html' %}
-        {% endfor %}
-
-    </div>
-
         {% if form %}
 {#        <form action="" method="post">#}
 {#            {{ form.hidden_tag() }}#}

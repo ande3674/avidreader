@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+
+        <h1>Current most popular books from the NYT Bestsellers List</h1>
+
+    <div>
+        {% for nyt_book in nyt_books %}
+            {% include '_nyt_book.html' %}
+        {% endfor %}
+
+    </div>
+
+{% endblock %}

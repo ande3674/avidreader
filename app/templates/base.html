@@ -25,8 +25,9 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li><a href="{{ url_for('index') }}">Home</a></li>
-                        <li><a href="{{ url_for('explore') }}">Explore</a></li>
-                        <li><a href="{{ url_for('search') }}">Search</a></li>
+                        <li><a href="{{ url_for('explore') }}">Explore Friends' Lists</a></li>
+                        <li><a href="{{ url_for('search') }}">Search New</a></li>
+                        <li><a href="{{ url_for('popular') }}">Discover Popular Books</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         {% if current_user.is_anonymous %}

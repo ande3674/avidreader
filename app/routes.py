@@ -14,8 +14,7 @@ import ast
 @app.route('/index', methods=['GET', 'POST'])
 @login_required
 def index():
-    nyt_books = nyt_api.get_nyt_bestsellers()
-
+    #nyt_books = nyt_api.get_nyt_bestsellers()
     form = PostForm()
     if form.validate_on_submit():
         post = Post(body=form.post.data, author=current_user)
@@ -24,7 +23,7 @@ def index():
         flash('your post is now live!')
         return redirect(url_for('index'))
     posts = current_user.followed_posts().all()
-    return render_template("index.html", title='Home Page', form=form, posts=posts, nyt_books=nyt_books)
+    return render_template("index.html", title='Home Page', form=form, posts=posts)#, nyt_books=nyt_books)
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -164,9 +163,15 @@ def unfollow(username):
 @app.route('/explore')
 @login_required
 def explore():
-    posts = Post.query.order_by(Post.timestamp.desc()).all()
+    #posts = Post.query.order_by(Post.timestamp.desc()).all()
     books = Book.query.order_by(Book.timestamp.desc()).all()
     return render_template("index.html", title='Explore', books=books)
+
+@app.route('/popular')
+@login_required
+def popular():
+    nyt_books = nyt_api.get_nyt_bestsellers()
+    return render_template("popular.html", title='Popular Books', nyt_books=nyt_books)
 
 
 @app.before_request
