@@ -9,5 +9,10 @@ class Config(object):
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or 'sqlite:///' + os.path.join(basedir, 'app.db')
     SQL_ALCHEMY_TRACK_MODIFICATIONS = False
     POSTS_PER_PAGE = 3
+    # GOOGLE API INFO
     URL_END = '&key=AIzaSyAdhqZaUyS--kQ3BnAjUOmmfSc70FeCYwg'
     URL_START = 'https://www.googleapis.com/books/v1/volumes?q='
+
+    # NYT API INFO
+    NYT_KEY = 'ffcd3be1d1eb404ba71dc5743e36ff3f'
+    NYT_URL = 'https://api.nytimes.com/svc/books/v3/lists.json?list=e-book-fiction&api-key=ffcd3be1d1eb404ba71dc5743e36ff3f'

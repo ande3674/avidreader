@@ -6,6 +6,7 @@ from app.forms import LoginForm, RegistrationForm, EditProfileForm, PostForm, Se
 from app.models import User, Post, Book
 from datetime import datetime
 import app.api as api
+import app.nyt_api as nyt_api
 import ast
 
 
@@ -13,6 +14,7 @@ import ast
 @app.route('/index', methods=['GET', 'POST'])
 @login_required
 def index():
+    nyt_books = nyt_api.get_nyt_bestsellers()
     form = PostForm()
     if form.validate_on_submit():
         post = Post(body=form.post.data, author=current_user)
@@ -21,7 +23,7 @@ def index():
         flash('your post is now live!')
         return redirect(url_for('index'))
     posts = current_user.followed_posts().all()
-    return render_template("index.html", title='Home Page', form=form, posts=posts)
+    return render_template("index.html", title='Home Page', form=form, posts=posts, nyt_books=nyt_books)
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -105,6 +107,10 @@ def search():
 def search_results(search):
     search_string = search.data['search']
     results = api.get_book_data(search_string)
+    if results is None:
+        flash('No results returned, try again!')
+        form = SearchForm()
+        return render_template('search.html', form=form)
     return render_template('results.html', books=results)
 
 @app.route('/save', methods=['POST'])
