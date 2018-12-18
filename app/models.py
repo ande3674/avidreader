@@ -76,6 +76,7 @@ class Book(db.Model):
     image_link_small = db.Column(db.String(240))
     description = db.Column(db.String(1000))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
 
 
 

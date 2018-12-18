@@ -21,9 +21,13 @@
 
     </table>
 
+        <h1>My recent books...</h1>
+
         {% for book in books %}
             {% include '_book.html' %}
         {% endfor %}
+
+        <h1>My recent posts...</h1>
 
         {% for post in posts %}
             {% include '_post.html' %}

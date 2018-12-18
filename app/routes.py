@@ -158,7 +158,8 @@ def unfollow(username):
 @login_required
 def explore():
     posts = Post.query.order_by(Post.timestamp.desc()).all()
-    return render_template("index.html", title='Explore', posts=posts)
+    books = Book.query.order_by(Book.timestamp.desc()).all()
+    return render_template("index.html", title='Explore', books=books)
 
 
 @app.before_request

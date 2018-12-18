@@ -7,8 +7,12 @@
             <img src="{{ book.image_link_small }}" />
         </td>
         <td>
-            {{ book.title }}
-            <br>{{ book.author }}
+            <a href="{{ url_for('user', username=book.owner.username) }}">
+                {{ book.owner.username }}
+            </a> is reading:
+            <br>{{ book.title }}
+            <br>By: {{ book.author }}
+            <br>
         </td>
     </tr>
 </table>
