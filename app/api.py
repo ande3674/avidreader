@@ -36,6 +36,16 @@ def get_book_data(search):
         print('Something went wrong.')
 
 
+def get_one_book_image_link(search):
+    try:
+        json_data = requests.get(config.Config.URL_START + split_search_term(search) + config.Config.URL_END).json()
+        items = json_data['items']
+        return items[0]['volumeInfo']['imageLinks']['smallThumbnail']
+    except Exception:
+        print('Something went wrong.')
+
+
+
 def split_search_term(search_term):
     terms = search_term.split(' ')
     concat = ''

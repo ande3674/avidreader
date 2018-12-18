@@ -1,5 +1,6 @@
 from config import Config
 import requests
+import app.api as google_api
 
 
 def get_nyt_bestsellers():
@@ -13,8 +14,13 @@ def get_nyt_bestsellers():
         book_info['author'] = current_book['book_details'][0]['author']
         book_info['description'] = current_book['book_details'][0]['description']
         book_info['amazon_link'] = current_book['amazon_product_url']
+        book_info['cover_image'] = get_google_cover_image(title=current_book['book_details'][0]['title'])
         books.append(book_info)
     return books
+
+def get_google_cover_image(title):
+    return google_api.get_one_book_image_link(title)
+
 
 # b = get_nyt_bestsellers()
 # print(b)
