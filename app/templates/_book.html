@@ -1,0 +1,14 @@
+<table class="table table-hover">
+    <tr>
+        <td width="70px">
+{#            <a href="{{ url_for('user', username=post.author.username) }}">#}
+{#                <img src="{{ book.image_link_small }}" />#}
+{#            </a>#}
+            <img src="{{ book.image_link_small }}" />
+        </td>
+        <td>
+            {{ book.title }}
+            <br>{{ book.author }}
+        </td>
+    </tr>
+</table>
