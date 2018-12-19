@@ -102,6 +102,7 @@ def search():
     #books = api.get_book_data(search)
     return render_template('search.html', form=form)#, books=books)
 
+
 @app.route('/results')
 @login_required
 def search_results(search):
@@ -112,6 +113,7 @@ def search_results(search):
         form = SearchForm()
         return render_template('search.html', form=form)
     return render_template('results.html', books=results)
+
 
 @app.route('/save', methods=['POST'])
 @login_required
@@ -166,6 +168,7 @@ def explore():
     #posts = Post.query.order_by(Post.timestamp.desc()).all()
     books = Book.query.order_by(Book.timestamp.desc()).all()
     return render_template("index.html", title='Explore', books=books)
+
 
 @app.route('/popular')
 @login_required

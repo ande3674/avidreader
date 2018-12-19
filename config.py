@@ -16,3 +16,4 @@ class Config(object):
     # NYT API INFO
     NYT_KEY = 'ffcd3be1d1eb404ba71dc5743e36ff3f'
     NYT_URL = 'https://api.nytimes.com/svc/books/v3/lists.json?list=e-book-fiction&api-key=ffcd3be1d1eb404ba71dc5743e36ff3f'
+    NYT_URL_NONFICTION = 'https://api.nytimes.com/svc/books/v3/lists.json?list=e-book-nonfiction&api-key=ffcd3be1d1eb404ba71dc5743e36ff3f'
