@@ -8,8 +8,8 @@ def get_book_data(search):
         items = json_data['items']
         search_results = []
 
-        if len(items) > 3:
-            for i in range(3):
+        if len(items) > 5:
+            for i in range(5):
                 book_info = {}
                 book_info['title'] = items[i]['volumeInfo']['title']
                 book_info['author'] = items[i]['volumeInfo']['authors'][0]
