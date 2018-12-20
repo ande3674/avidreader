@@ -173,7 +173,13 @@ def explore():
 @app.route('/popular')
 @login_required
 def popular():
-    nyt_books = nyt_api.get_nyt_bestsellers()
+    list_type = 'fiction'
+    list_type = request.args.get('list_type')
+    if list_type == 'fiction':
+        nyt_books = nyt_api.get_nyt_bestsellers()
+    else:
+        nyt_books = nyt_api.get_nyt_bestsellers_nonfiction()
+
     return render_template("popular.html", title='Popular Books', nyt_books=nyt_books)
 
 
